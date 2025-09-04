@@ -35,7 +35,7 @@ const columns: TColumn[] = [
 export default function Page() {
   return (
     <div className="min-h-svh">
-      <Board columns={columns} />
+      <Board columns={columns} title="Demo Board" />
     </div>
   );
 }

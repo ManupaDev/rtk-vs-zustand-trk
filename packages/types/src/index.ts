@@ -10,4 +10,9 @@ export type TColumn = {
   items: TCardItem[]
 }
 
+export type TBoard = {
+  title: string
+  columns: TColumn[]
+}
+
 
