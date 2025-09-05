@@ -44,7 +44,7 @@ export default function Page() {
     <div className="min-h-svh">
       <Board
         columns={columns}
-        title="Taxxa AI"
+        title="Taxxa AI Zustand"
         filters={board.filters}
         priorities={["LOW", "MEDIUM", "HIGH", "HIGHEST"]}
         setSearch={(q) => setSearch(q)}
