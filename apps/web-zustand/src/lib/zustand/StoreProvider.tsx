@@ -7,6 +7,7 @@ import { useStore } from "zustand";
 import {
   type BoardStore,
   createBoardStore,
+  initBoardStore,
 } from "@/lib/zustand/features/boardStore";
 
 export type BoardStoreApi = ReturnType<typeof createBoardStore>;

@@ -31,8 +31,8 @@ export const defaultInitState: BoardState = {
   },
 };
 
-export const initBoardStore = (): BoardState => {
-  return { filters: { search: "", priority: null }, ui: { isNewCardDialogOpen: false } };
+export const initBoardStore = (state: BoardState): BoardState => {
+  return state;
 };
 
 export const createBoardStore = (initState: BoardState = defaultInitState) => {
