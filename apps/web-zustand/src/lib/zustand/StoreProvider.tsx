@@ -2,12 +2,11 @@
 
 import { type ReactNode, createContext, useRef, useContext } from "react";
 import { useStore } from "zustand";
+import { BoardSlice } from "./features/boardSlice";
+import { createAppStore } from "./store";
+export type AppStoreApi = ReturnType<typeof createAppStore>;
 
-import { type BoardStore, createBoardStore } from "@/lib/zustand/store";
-
-export type BoardStoreApi = ReturnType<typeof createBoardStore>;
-
-export const BoardStoreContext = createContext<BoardStoreApi | undefined>(
+export const AppStoreContext = createContext<AppStoreApi | undefined>(
   undefined
 );
 
@@ -16,24 +15,24 @@ export interface BoardStoreProviderProps {
 }
 
 export const BoardStoreProvider = ({ children }: BoardStoreProviderProps) => {
-  const storeRef = useRef<BoardStoreApi | null>(null);
+  const storeRef = useRef<AppStoreApi | null>(null);
   if (storeRef.current === null) {
-    storeRef.current = createBoardStore();
+    storeRef.current = createAppStore();
   }
 
   return (
-    <BoardStoreContext.Provider value={storeRef.current}>
+    <AppStoreContext.Provider value={storeRef.current}>
       {children}
-    </BoardStoreContext.Provider>
+    </AppStoreContext.Provider>
   );
 };
 
-export const useBoardStore = <T,>(selector: (store: BoardStore) => T): T => {
-  const boardStoreContext = useContext(BoardStoreContext);
+export const useAppStore = <T,>(selector: (store: BoardSlice) => T): T => {
+  const appStoreContext = useContext(AppStoreContext);
 
-  if (!boardStoreContext) {
-    throw new Error(`useBoardStore must be used within BoardStoreProvider`);
+  if (!appStoreContext) {
+    throw new Error(`useAppStore must be used within AppStoreProvider`);
   }
 
-  return useStore(boardStoreContext, selector);
+  return useStore(appStoreContext, selector);
 };
