@@ -1,9 +1,7 @@
 "use client";
 
 import { Button } from "@workspace/ui/components/button";
-import { Checkbox } from "@workspace/ui/components/checkbox";
 import { Input } from "@workspace/ui/components/input";
-import { Label } from "@workspace/ui/components/label";
 import {
   Select,
   SelectContent,
@@ -13,16 +11,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@workspace/ui/components/select";
+import { useBoard } from "@workspace/ui/components/shared/Board/BoardContext";
 
-type FiltersToolbarProps = {
-  priorities?: string[];
-};
-
-const DEFAULT_PRIORITIES = ["LOW", "MEDIUM", "HIGH", "HIGHEST"]
-
-export function FiltersToolbar({
-  priorities = DEFAULT_PRIORITIES,
-}: FiltersToolbarProps) {
+export function FiltersToolbar() {
+  const { filters, priorities, setSearch, setPriority, clearFilters, newCard } = useBoard();
+  
   return (
     <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
       <div className="flex flex-1 items-center gap-3">
@@ -31,10 +24,15 @@ export function FiltersToolbar({
             type="search"
             placeholder="Search cards..."
             aria-label="Search cards"
+            value={filters.search ?? ""}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
 
-        <Select defaultValue="">
+        <Select
+          value={filters.priority ?? ""}
+          onValueChange={(v) => setPriority(v === "ALL" ? null : v)}
+        >
           <SelectTrigger aria-label="Filter by priority" className="w-40">
             <SelectValue placeholder="Priority" />
           </SelectTrigger>
@@ -50,13 +48,15 @@ export function FiltersToolbar({
           </SelectContent>
         </Select>
 
-        <Button variant="secondary" size="sm">
+        <Button variant="secondary" size="sm" onClick={clearFilters}>
           Clear filters
         </Button>
       </div>
 
       <div className="flex items-center gap-2">
-        <Button size="sm">New card</Button>
+        <Button size="sm" onClick={newCard}>
+          New card
+        </Button>
       </div>
     </div>
   );

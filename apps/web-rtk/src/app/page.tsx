@@ -1,5 +1,7 @@
 "use client";
 
+import { setSearch, setPriority } from "@/lib/redux/features/boardSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { TColumn } from "@workspace/types";
 import Board from "@workspace/ui/components/shared/Board/Board";
 
@@ -33,9 +35,22 @@ const columns: TColumn[] = [
 ];
 
 export default function Page() {
+  const { filters } = useAppSelector((state) => state.board);
+  const dispatch = useAppDispatch();
+
   return (
     <div className="min-h-svh">
-      <Board columns={columns} title="Demo Board" />
+      <Board
+        columns={columns}
+        title="Taxxa AI"
+        filters={filters}
+        priorities={["LOW", "MEDIUM", "HIGH", "HIGHEST"]}
+        setSearch={(q) => dispatch(setSearch(q))}
+        setPriority={(p) => dispatch(setPriority(p))}
+        clearFilters={() => {}}
+        newCard={() => {}}
+        onCardClick={() => {}}
+      />
     </div>
   );
 }
