@@ -1,5 +1,6 @@
 "use client";
 
+import useStore from "@/zustand/store";
 import { TColumn } from "@workspace/types";
 import Board from "@workspace/ui/components/shared/Board/Board";
 
@@ -33,20 +34,22 @@ const columns: TColumn[] = [
 ];
 
 export default function Page() {
+  const { filters, priorities, setSearch, setPriority, clearFilters } =
+    useStore((state) => state);
 
   return (
     <div className="min-h-svh">
-      {/* <Board
+      <Board
         columns={columns}
         title="Taxxa AI"
         filters={filters}
         priorities={["LOW", "MEDIUM", "HIGH", "HIGHEST"]}
-        setSearch={(q) => dispatch(setSearch(q))}
-        setPriority={(p) => dispatch(setPriority(p))}
-        clearFilters={() => dispatch(clearFilters())}
+        setSearch={(q) => setSearch(q)}
+        setPriority={(p) => setPriority(p)}
+        clearFilters={() => clearFilters()}
         newCard={() => {}}
         onCardClick={() => {}}
-      /> */}
+      />
     </div>
   );
 }
