@@ -11,6 +11,7 @@ export type TColumn = {
 };
 
 export type TBoard = {
+  id: string;
   title: string;
   columns: TColumn[];
 };
