@@ -132,6 +132,13 @@ const TaskCreateForm = ({
         />
 
         <div className="flex justify-end gap-2 pt-2">
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => setIsNewCardDialogOpen(false)}
+          >
+            Cancel
+          </Button>
           <Button type="submit" disabled={form.formState.isSubmitting}>
             {form.formState.isSubmitting ? "Creating..." : "Create"}
           </Button>
