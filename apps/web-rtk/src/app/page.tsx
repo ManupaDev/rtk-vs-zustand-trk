@@ -6,15 +6,17 @@ import {
   setPriority,
   setSearch,
   setIsNewCardDialogOpen,
+  selectBoard,
+  selectUi,
 } from "@/lib/redux/features/boardSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import Board from "@workspace/ui/components/shared/Board/Board";
 import { Loader2 } from "lucide-react";
 
 export default function Page() {
-  const { filters, isNewCardDialogOpen } = useAppSelector(
-    (state) => state.board
-  );
+  const { filters } = useAppSelector(selectBoard);
+  const { isNewCardDialogOpen } = useAppSelector(selectUi);
+
   const dispatch = useAppDispatch();
   const { data: board, isLoading, isError } = useGetBoardByIdQuery("1");
   const [createCard, { isLoading: isCreating }] = useCreateCardMutation();
