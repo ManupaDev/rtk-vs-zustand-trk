@@ -3,7 +3,7 @@ import { TColumn } from "@workspace/types";
 import { Separator } from "@workspace/ui/components/separator";
 import { Column } from "@workspace/ui/components/shared/Board/Column";
 
-const Board = ({ columns, title }: { columns: TColumn[], title: string }) => {
+const Board = ({ columns, title }: { columns: TColumn[]; title: string }) => {
   return (
     <div className="px-6 py-6">
       <div className="flex items-center justify-between">
