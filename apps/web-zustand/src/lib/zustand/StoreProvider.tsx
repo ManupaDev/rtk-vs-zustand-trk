@@ -43,4 +43,5 @@ const useBoardStore = <T,>(selector: (store: BoardStore) => T): T => {
 };
 
 export const useFilters = () => useBoardStore((state) => state.filters)
+export const useUi = () => useBoardStore((state) => state.ui)
 export const useActions = () => useBoardStore((state) => state.actions)

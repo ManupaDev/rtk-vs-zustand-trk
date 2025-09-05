@@ -5,6 +5,9 @@ export type BoardState = {
     search: string;
     priority: string | null;
   };
+  ui: {
+    isNewCardDialogOpen: boolean;
+  };
 };
 
 export type BoardActions = {
@@ -12,6 +15,7 @@ export type BoardActions = {
     setSearch: (search: string) => void;
     setPriority: (priority: string | null) => void;
     clearFilters: () => void;
+    setIsNewCardDialogOpen: (open: boolean) => void;
   };
 };
 
@@ -22,10 +26,13 @@ export const defaultInitState: BoardState = {
     search: "",
     priority: null,
   },
+  ui: {
+    isNewCardDialogOpen: false,
+  },
 };
 
 export const initBoardStore = (): BoardState => {
-  return { filters: { search: "", priority: null } };
+  return { filters: { search: "", priority: null }, ui: { isNewCardDialogOpen: false } };
 };
 
 export const createBoardStore = (initState: BoardState = defaultInitState) => {
@@ -38,6 +45,8 @@ export const createBoardStore = (initState: BoardState = defaultInitState) => {
         set((state) => ({ filters: { ...state.filters, priority } })),
       clearFilters: () =>
         set((state) => ({ filters: { search: "", priority: null } })),
+      setIsNewCardDialogOpen: (open: boolean) =>
+        set((state) => ({ ui: { ...state.ui, isNewCardDialogOpen: open } })),
     },
   }));
 };

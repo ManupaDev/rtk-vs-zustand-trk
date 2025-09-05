@@ -1,14 +1,17 @@
 "use client";
 
-import { boardsKeys, getBoardById } from "@/lib/api/boards";
-import { useActions, useFilters } from "@/lib/zustand/StoreProvider";
-import { useQuery } from "@tanstack/react-query";
+import { boardsKeys, createCard, getBoardById } from "@/lib/api/boards";
+import { useActions, useFilters, useUi } from "@/lib/zustand/StoreProvider";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Board from "@workspace/ui/components/shared/Board/Board";
 import { Loader2 } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function Workspace({ boardId }: { boardId: string }) {
   const filters = useFilters();
-  const { setSearch, setPriority, clearFilters } = useActions();
+  const { setSearch, setPriority, clearFilters, setIsNewCardDialogOpen } =
+    useActions();
+  const { isNewCardDialogOpen } = useUi();
 
   const {
     data: board,
@@ -17,6 +20,25 @@ export default function Workspace({ boardId }: { boardId: string }) {
   } = useQuery({
     queryKey: boardsKeys.board(boardId),
     queryFn: ({ queryKey }) => getBoardById(queryKey[1]),
+  });
+
+  const queryClient = useQueryClient();
+
+  const { mutate: createCardMutate } = useMutation({
+    mutationFn: (data: {
+      title: string;
+      priority?: string | null;
+      columnId: string;
+    }) => {
+      return createCard({
+        boardId,
+        columnId: data.columnId,
+        data: { title: data.title, priority: data.priority },
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: boardsKeys.board(boardId) });
+    },
   });
 
   if (isError) {
@@ -45,8 +67,11 @@ export default function Workspace({ boardId }: { boardId: string }) {
         setSearch={(q) => setSearch(q)}
         setPriority={(p) => setPriority(p)}
         clearFilters={() => clearFilters()}
-        isNewCardDialogOpen={false}
-        setIsNewCardDialogOpen={(open) => {}}
+        onCreateCard={(data) => {
+          createCardMutate(data);
+        }}
+        isNewCardDialogOpen={isNewCardDialogOpen}
+        setIsNewCardDialogOpen={(open) => setIsNewCardDialogOpen(open)}
         onCardClick={() => {}}
       />
     </div>
