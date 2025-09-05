@@ -1,5 +1,5 @@
 import Workspace from "@/components/Workspace";
-import { getBoardById } from "@/lib/api/boards";
+import { boardsKeys, getBoardById } from "@/lib/api/boards";
 import {
   dehydrate,
   HydrationBoundary,
@@ -12,8 +12,8 @@ export default async function Page() {
   const id = "1";
 
   await queryClient.prefetchQuery({
-    queryKey: ["board", id],
-    queryFn: ({ queryKey }) => getBoardById(queryKey[1] as string),
+    queryKey: boardsKeys.board(id),
+    queryFn: ({ queryKey }) => getBoardById(queryKey[1]),
   });
 
   return (

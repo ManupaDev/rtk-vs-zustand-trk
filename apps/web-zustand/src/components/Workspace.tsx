@@ -1,6 +1,6 @@
 "use client";
 
-import { getBoardById } from "@/lib/api/boards";
+import { boardsKeys, getBoardById } from "@/lib/api/boards";
 import { useActions, useFilters } from "@/lib/zustand/StoreProvider";
 import { useQuery } from "@tanstack/react-query";
 import Board from "@workspace/ui/components/shared/Board/Board";
@@ -15,8 +15,8 @@ export default function Workspace({ boardId }: { boardId: string }) {
     isPending,
     isError,
   } = useQuery({
-    queryKey: ["board", boardId],
-    queryFn: ({ queryKey }) => getBoardById(queryKey[1] as string),
+    queryKey: boardsKeys.board(boardId),
+    queryFn: ({ queryKey }) => getBoardById(queryKey[1]),
   });
 
   if (isError) {
