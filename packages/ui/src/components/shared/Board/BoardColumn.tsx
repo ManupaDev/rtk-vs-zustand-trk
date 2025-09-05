@@ -27,7 +27,7 @@ export const Column = ({ column }: { column: TColumn }) => {
           <CardTitle className="text-sm font-medium tracking-wide">
             {column.name}
           </CardTitle>
-          <Badge variant="secondary">{column.items.length}</Badge>
+          <Badge variant="secondary">{filteredItems.length}</Badge>
         </div>
       </CardHeader>
       <CardContent className="p-0">
