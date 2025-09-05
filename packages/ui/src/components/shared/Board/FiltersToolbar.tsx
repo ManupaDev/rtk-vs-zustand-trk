@@ -39,7 +39,7 @@ export function FiltersToolbar() {
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Priorities</SelectLabel>
-              {priorities.map((priority) => (
+              {["ALL", ...priorities].map((priority) => (
                 <SelectItem key={priority} value={priority}>
                   {priority}
                 </SelectItem>

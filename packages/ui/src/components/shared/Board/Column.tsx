@@ -8,8 +8,18 @@ import {
 import { ScrollArea } from "@workspace/ui/components/scroll-area";
 import type { TColumn } from "@workspace/types";
 import { CardItem } from "@workspace/ui/components/shared/Board/CardItem";
+import { useBoard } from "@workspace/ui/components/shared/Board/BoardContext";
 
 export const Column = ({ column }: { column: TColumn }) => {
+  const { filters } = useBoard();
+
+  const filteredItems = column.items.filter((item) => {
+    return (
+      item.title.toLowerCase().includes(filters.search?.toLowerCase() ?? "") &&
+      (filters.priority === null || item.priority === filters.priority)
+    );
+  });
+
   return (
     <Card className="h-[70vh]">
       <CardHeader>
@@ -23,7 +33,7 @@ export const Column = ({ column }: { column: TColumn }) => {
       <CardContent className="p-0">
         <ScrollArea className="h-[calc(70vh-5rem)]">
           <div className="flex flex-col gap-3 p-4">
-            {column.items.map((item) => (
+            {filteredItems.map((item) => (
               <CardItem key={item.id} item={item} />
             ))}
           </div>
