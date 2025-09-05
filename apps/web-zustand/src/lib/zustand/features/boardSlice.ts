@@ -14,7 +14,7 @@ export interface BoardSlice {
   clearFilters: () => void;
 }
 
-export const initBoardSlice = (): BoardSlice => {
+export const initBoardSlice = () => {
   return {
     board: { filters: { search: "", priority: null } },
   } as BoardSlice;
