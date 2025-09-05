@@ -1,12 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
 import boardReducer from "./features/boardSlice";
+import { Api } from "./api";
 
 export const makeStore = () => {
-  return configureStore({
+  const store = configureStore({
     reducer: {
       board: boardReducer,
+      [Api.reducerPath]: Api.reducer,
     },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(Api.middleware),
   });
+  setupListeners(store.dispatch);
+  return store;
 };
 
 // Infer the type of makeStore
