@@ -1,4 +1,4 @@
-import { TBoard } from "@workspace/types";
+import { TBoard, TCardItem } from "@workspace/types";
 import { boards } from "./data";
 
 const db = {
@@ -16,6 +16,24 @@ const db = {
     },
     deleteBoard: async(id: string) => {
       boards.filter((board) => board.id !== id);
+    },
+    addCard: async (
+      boardId: string,
+      columnId: string,
+      data: { title: string; priority?: string | null }
+    ): Promise<TCardItem | null> => {
+      const board = boards.find((b) => b.id === boardId);
+      if (!board) return null;
+      const column = board.columns.find((c) => c.id === columnId);
+      if (!column) return null;
+      const genId = () => "c" + Math.random().toString(36).slice(2, 8);
+      const item: TCardItem = {
+        id: genId(),
+        title: data.title,
+        priority: data.priority ?? undefined,
+      };
+      column.items.unshift(item);
+      return item;
     },
   },
 };
