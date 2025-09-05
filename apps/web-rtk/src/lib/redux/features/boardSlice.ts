@@ -31,10 +31,14 @@ export const boardSlice = createSlice({
     setPriority: (state, action: PayloadAction<string | null>) => {
       state.filters.priority = action.payload;
     },
+    clearFilters: (state) => {
+      state.filters.search = "";
+      state.filters.priority = null;
+    },
   },
 });
 
-export const { setSearch, setPriority } = boardSlice.actions;
+export const { setSearch, setPriority, clearFilters } = boardSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectBoard = (state: RootState) => state.board;

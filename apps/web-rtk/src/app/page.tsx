@@ -1,6 +1,6 @@
 "use client";
 
-import { setSearch, setPriority } from "@/lib/redux/features/boardSlice";
+import { setSearch, setPriority, clearFilters } from "@/lib/redux/features/boardSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { TColumn } from "@workspace/types";
 import Board from "@workspace/ui/components/shared/Board/Board";
@@ -47,7 +47,7 @@ export default function Page() {
         priorities={["LOW", "MEDIUM", "HIGH", "HIGHEST"]}
         setSearch={(q) => dispatch(setSearch(q))}
         setPriority={(p) => dispatch(setPriority(p))}
-        clearFilters={() => {}}
+        clearFilters={() => dispatch(clearFilters())}
         newCard={() => {}}
         onCardClick={() => {}}
       />
