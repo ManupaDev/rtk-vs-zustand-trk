@@ -9,7 +9,12 @@ export const boardsKeys = {
 };
 
 export async function getBoardById(id: string): Promise<TBoard> {
-  return ky.get(`${BASE_URL}/boards/${id}`).json();
+  try {
+    const value = (await ky.get(`${BASE_URL}/boards/${id}`).json()) as TBoard;
+    return value;
+  } catch (error) {
+    throw new Error("Error getting board by id...");
+  }
 }
 
 export async function createCard(data: {
@@ -17,9 +22,17 @@ export async function createCard(data: {
   columnId: string;
   data: { title: string; priority?: string | null };
 }): Promise<TCardItem> {
-  return ky
-    .post(`${BASE_URL}/boards/${data.boardId}/columns/${data.columnId}/cards`, {
-      json: data.data,
-    })
-    .json();
+  try {
+    const value = (await ky
+      .post(
+        `${BASE_URL}/boards/${data.boardId}/columns/${data.columnId}/cards`,
+        {
+          json: data.data,
+        }
+      )
+      .json()) as TCardItem;
+    return value;
+  } catch (error) {
+    throw new Error("Error creating card...");
+  }
 }

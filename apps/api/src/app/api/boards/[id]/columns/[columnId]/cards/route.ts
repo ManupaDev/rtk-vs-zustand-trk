@@ -16,10 +16,14 @@ export async function POST(
     if (!title) {
       return NextResponse.json({ error: "title required" }, { status: 400 });
     }
+    throw new Error("test");
     console.log(title, priority);
     const created = await db.boards.addCard(id, columnId, { title, priority });
     if (!created) {
-      return NextResponse.json({ error: "Board/column not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Board/column not found" },
+        { status: 404 }
+      );
     }
     return NextResponse.json(created, { status: 201 });
   } catch (error) {
@@ -29,5 +33,3 @@ export async function POST(
     );
   }
 }
-
-

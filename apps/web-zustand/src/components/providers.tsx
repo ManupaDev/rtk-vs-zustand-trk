@@ -3,10 +3,13 @@
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import * as React from "react";
 import { BoardStoreProvider } from "@/lib/zustand/StoreProvider";
+import { toast, Toaster } from "@workspace/ui/components/toast";
 
 // Since QueryClientProvider relies on useContext under the hood, we have to put 'use client' on top
 import {
   isServer,
+  MutationCache,
+  QueryCache,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
@@ -20,6 +23,11 @@ function makeQueryClient() {
         staleTime: 60 * 1000,
       },
     },
+    mutationCache: new MutationCache({
+      onError: (error) => {
+        toast.error(`Something went wrong: ${error.message}`);
+      },
+    }),
   });
 }
 
@@ -56,6 +64,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
           enableColorScheme
         >
           {children}
+          <Toaster position="bottom-right" />
         </NextThemesProvider>
       </BoardStoreProvider>
     </QueryClientProvider>
