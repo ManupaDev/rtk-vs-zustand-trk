@@ -7,7 +7,7 @@ import {
 } from "@workspace/ui/components/card";
 import { ScrollArea } from "@workspace/ui/components/scroll-area";
 import type { TColumn } from "@workspace/types";
-import { CardItem } from "@workspace/ui/components/shared/Board/CardItem";
+import { CardItem } from "@workspace/ui/components/shared/Board/BoardCardItem";
 import { useBoard } from "@workspace/ui/components/shared/Board/BoardContext";
 
 export const Column = ({ column }: { column: TColumn }) => {

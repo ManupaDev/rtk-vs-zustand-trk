@@ -1,12 +1,52 @@
-import { Button } from "@workspace/ui/components/button";
+"use client";
+
+import { TColumn } from "@workspace/types";
+import Board from "@workspace/ui/components/shared/Board/Board";
+
+const columns: TColumn[] = [
+  {
+    id: "todo",
+    name: "TODO",
+    items: [
+      { id: "c1", title: "Set up project repo", priority: "HIGH" },
+      { id: "c2", title: "Design Kanban types", priority: "MEDIUM" },
+    ],
+  },
+  {
+    id: "in-progress",
+    name: "IN PROGRESS",
+    items: [
+      { id: "c3", title: "Build board page", priority: "HIGH" },
+      { id: "c4", title: "Wire RTK Query", priority: "MEDIUM" },
+    ],
+  },
+  {
+    id: "in-review",
+    name: "IN REVIEW",
+    items: [{ id: "c5", title: "Add tests", priority: "LOW" }],
+  },
+  {
+    id: "done",
+    name: "COMPLETED",
+    items: [{ id: "c6", title: "Initialize monorepo", priority: "HIGHEST" }],
+  },
+];
 
 export default function Page() {
+
   return (
-    <div className="flex items-center justify-center min-h-svh">
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">Hello World</h1>
-        <Button size="sm">Button</Button>
-      </div>
+    <div className="min-h-svh">
+      {/* <Board
+        columns={columns}
+        title="Taxxa AI"
+        filters={filters}
+        priorities={["LOW", "MEDIUM", "HIGH", "HIGHEST"]}
+        setSearch={(q) => dispatch(setSearch(q))}
+        setPriority={(p) => dispatch(setPriority(p))}
+        clearFilters={() => dispatch(clearFilters())}
+        newCard={() => {}}
+        onCardClick={() => {}}
+      /> */}
     </div>
   );
 }

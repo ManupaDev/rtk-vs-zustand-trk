@@ -1,7 +1,7 @@
-import { FiltersToolbar } from "@workspace/ui/components/shared/Board/FiltersToolbar";
+import { FiltersToolbar } from "@workspace/ui/components/shared/Board/BoardFiltersToolbar";
 import { TColumn } from "@workspace/types";
 import { Separator } from "@workspace/ui/components/separator";
-import { Column } from "@workspace/ui/components/shared/Board/Column";
+import { Column } from "@workspace/ui/components/shared/Board/BoardColumn";
 import {
   BoardProvider,
   type BoardFilters,

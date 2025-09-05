@@ -19,6 +19,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "../../packages/ui/src/components/shared/Board/Board.tsx", "../../packages/ui/src/components/shared/Board/CardItem.tsx", "../../packages/ui/src/components/shared/Board/Column.tsx", "../../packages/ui/src/components/shared/Board/FiltersToolbar.tsx"  ],
+, "../../packages/ui/src/components/shared/Board/Board.tsx", "../../packages/ui/src/components/shared/Board/BoardCardItem.tsx", "../../packages/ui/src/components/shared/Board/BoardColumn.tsx", "../../packages/ui/src/components/shared/Board/BoardFiltersToolbar.tsx"  ],
   "exclude": ["node_modules"]
 }
