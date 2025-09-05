@@ -29,3 +29,10 @@ To use the components in your app, import them from the `ui` package.
 ```tsx
 import { Button } from "@workspace/ui/components/button";
 ```
+
+---
+RTK Query not initialData compatible
+https://github.com/reduxjs/redux-toolkit/issues/3585
+https://github.com/reduxjs/redux-toolkit/issues/3508
+https://phryneas.de/react-server-components-controversy
+

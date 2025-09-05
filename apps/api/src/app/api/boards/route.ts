@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import db from "@/app/server/infrastructure/db";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -7,7 +9,10 @@ export async function GET() {
     const boards = await db.boards.getAllBoards();
     return NextResponse.json(boards);
   } catch (error) {
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
 
@@ -19,6 +24,9 @@ export async function POST(req: NextRequest) {
     const newBoard = await db.boards.createBoard(data);
     return NextResponse.json(newBoard, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }

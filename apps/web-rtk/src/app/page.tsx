@@ -2,12 +2,11 @@
 
 import { useGetBoardByIdQuery } from "@/lib/redux/api";
 import {
-  setSearch,
-  setPriority,
   clearFilters,
+  setPriority,
+  setSearch,
 } from "@/lib/redux/features/boardSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import { TColumn } from "@workspace/types";
 import Board from "@workspace/ui/components/shared/Board/Board";
 import { Loader2 } from "lucide-react";
 
