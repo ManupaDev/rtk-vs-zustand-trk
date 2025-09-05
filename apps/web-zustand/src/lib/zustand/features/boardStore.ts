@@ -9,9 +9,11 @@ export type BoardState = {
 };
 
 export type BoardActions = {
-  setSearch: (search: string) => void;
-  setPriority: (priority: string | null) => void;
-  clearFilters: () => void;
+  actions: {
+    setSearch: (search: string) => void;
+    setPriority: (priority: string | null) => void;
+    clearFilters: () => void;
+  };
 };
 
 export type BoardStore = BoardState & BoardActions;
@@ -30,11 +32,13 @@ export const initBoardStore = (): BoardState => {
 export const createBoardStore = (initState: BoardState = defaultInitState) => {
   return createStore<BoardStore>()((set) => ({
     ...initState,
-    setSearch: (search: string) =>
-      set((state) => ({ filters: { ...state.filters, search } })),
-    setPriority: (priority: string | null) =>
-      set((state) => ({ filters: { ...state.filters, priority } })),
-    clearFilters: () =>
-      set((state) => ({ filters: { search: "", priority: null } })),
+    actions: {
+      setSearch: (search: string) =>
+        set((state) => ({ filters: { ...state.filters, search } })),
+      setPriority: (priority: string | null) =>
+        set((state) => ({ filters: { ...state.filters, priority } })),
+      clearFilters: () =>
+        set((state) => ({ filters: { search: "", priority: null } })),
+    },
   }));
 };

@@ -32,7 +32,7 @@ export const BoardStoreProvider = ({ children }: BoardStoreProviderProps) => {
   );
 };
 
-export const useBoardStore = <T,>(selector: (store: BoardStore) => T): T => {
+const useBoardStore = <T,>(selector: (store: BoardStore) => T): T => {
   const boardStoreContext = useContext(BoardStoreContext);
 
   if (!boardStoreContext) {
@@ -41,3 +41,6 @@ export const useBoardStore = <T,>(selector: (store: BoardStore) => T): T => {
 
   return useStore(boardStoreContext, selector);
 };
+
+export const useFilters = () => useBoardStore((state) => state.filters)
+export const useActions = () => useBoardStore((state) => state.actions)
