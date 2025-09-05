@@ -1,6 +1,6 @@
 "use client";
 
-import { useAppStore } from "@/lib/zustand/StoreProvider";
+import { useBoardStore } from "@/lib/zustand/StoreProvider";
 import { TColumn } from "@workspace/types";
 import Board from "@workspace/ui/components/shared/Board/Board";
 
@@ -34,18 +34,16 @@ const columns: TColumn[] = [
 ];
 
 export default function Page() {
-  const { board, setSearch, setPriority, clearFilters } = useAppStore(
+  const { filters, setSearch, setPriority, clearFilters } = useBoardStore(
     (state) => state
   );
-
-  console.log(board);
 
   return (
     <div className="min-h-svh">
       <Board
         columns={columns}
         title="Taxxa AI Zustand"
-        filters={board.filters}
+        filters={filters}
         priorities={["LOW", "MEDIUM", "HIGH", "HIGHEST"]}
         setSearch={(q) => setSearch(q)}
         setPriority={(p) => setPriority(p)}

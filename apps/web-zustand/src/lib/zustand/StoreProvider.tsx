@@ -1,38 +1,43 @@
+// src/providers/counter-store-provider.tsx
 "use client";
 
-import { type ReactNode, createContext, useContext, useRef } from "react";
+import { type ReactNode, createContext, useRef, useContext } from "react";
 import { useStore } from "zustand";
-import { BoardSlice, initBoardSlice } from "./features/boardSlice";
-import { createAppStore } from "./store";
-export type AppStoreApi = ReturnType<typeof createAppStore>;
 
-export const AppStoreContext = createContext<AppStoreApi | undefined>(
+import {
+  type BoardStore,
+  createBoardStore,
+} from "@/lib/zustand/features/boardStore";
+
+export type BoardStoreApi = ReturnType<typeof createBoardStore>;
+
+export const BoardStoreContext = createContext<BoardStoreApi | undefined>(
   undefined
 );
 
-export interface AppStoreProviderProps {
+export interface BoardStoreProviderProps {
   children: ReactNode;
 }
 
-export const AppStoreProvider = ({ children }: AppStoreProviderProps) => {
-  const storeRef = useRef<AppStoreApi | null>(null);
+export const BoardStoreProvider = ({ children }: BoardStoreProviderProps) => {
+  const storeRef = useRef<BoardStoreApi | null>(null);
   if (storeRef.current === null) {
-    storeRef.current = createAppStore(initBoardSlice());
+    storeRef.current = createBoardStore();
   }
 
   return (
-    <AppStoreContext.Provider value={storeRef.current}>
+    <BoardStoreContext.Provider value={storeRef.current}>
       {children}
-    </AppStoreContext.Provider>
+    </BoardStoreContext.Provider>
   );
 };
 
-export const useAppStore = <T,>(selector: (store: BoardSlice) => T): T => {
-  const appStoreContext = useContext(AppStoreContext);
+export const useBoardStore = <T,>(selector: (store: BoardStore) => T): T => {
+  const boardStoreContext = useContext(BoardStoreContext);
 
-  if (!appStoreContext) {
-    throw new Error(`useAppStore must be used within AppStoreProvider`);
+  if (!boardStoreContext) {
+    throw new Error(`useCounterStore must be used within CounterStoreProvider`);
   }
 
-  return useStore(appStoreContext, selector);
+  return useStore(boardStoreContext, selector);
 };

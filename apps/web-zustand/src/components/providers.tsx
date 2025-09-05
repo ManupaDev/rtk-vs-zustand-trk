@@ -2,11 +2,11 @@
 
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import * as React from "react";
-import { AppStoreProvider } from "@/lib/zustand/StoreProvider";
+import { BoardStoreProvider } from "@/lib/zustand/StoreProvider";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <AppStoreProvider>
+    <BoardStoreProvider>
       <NextThemesProvider
         attribute="class"
         defaultTheme="light"
@@ -15,6 +15,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
       >
         {children}
       </NextThemesProvider>
-    </AppStoreProvider>
+    </BoardStoreProvider>
   );
 }
