@@ -8,7 +8,6 @@ export interface BoardState {
     search: string;
     priority: string | null;
   };
-  priorities: string[];
 }
 
 // Define the initial state using that type
@@ -17,7 +16,6 @@ const initialState: BoardState = {
     search: "",
     priority: null,
   },
-  priorities: [],
 };
 
 export const boardSlice = createSlice({

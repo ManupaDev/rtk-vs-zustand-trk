@@ -36,16 +36,3 @@ export const createBoardStore = (initState: BoardState = defaultInitState) => {
     clearFilters: () => set({ filters: { search: "", priority: null } }),
   }));
 };
-
-const useStore = create<BoardStore>()((set) => ({
-  filters: {
-    search: "",
-    priority: null,
-  },
-  priorities: [],
-  setSearch: (search: string) =>
-    set((state) => ({ filters: { ...state.filters, search } })),
-  setPriority: (priority: string | null) =>
-    set((state) => ({ filters: { ...state.filters, priority } })),
-  clearFilters: () => set({ filters: { search: "", priority: null } }),
-}));
