@@ -49,13 +49,13 @@ export default function Page() {
         setIsNewCardDialogOpen={(open) =>
           dispatch(setIsNewCardDialogOpen(open))
         }
-        onCreateCard={(data) =>
+        onCreateCard={(data) => {
           createCard({
             boardId: board.id,
             columnId: data.columnId,
             data: { title: data.title, priority: data.priority },
-          })
-        }
+          }).unwrap();
+        }}
         onCardClick={() => {}}
       />
     </div>

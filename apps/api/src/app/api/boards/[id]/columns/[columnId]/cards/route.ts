@@ -13,6 +13,7 @@ export async function POST(
     const body = await req.json().catch(() => ({}));
     const title = String(body?.title ?? "").trim();
     const priority = body?.priority ? String(body.priority) : undefined;
+    throw new Error("test");
     if (!title) {
       return NextResponse.json({ error: "title required" }, { status: 400 });
     }

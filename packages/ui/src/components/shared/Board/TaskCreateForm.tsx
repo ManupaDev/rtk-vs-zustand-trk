@@ -49,15 +49,13 @@ const TaskCreateForm = ({
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    try {
-      console.log(values);
-      onCreateCard({
-        title: values.title,
-        priority: values.priority,
-        columnId: values.status.toLowerCase(),
-      });
-      setIsNewCardDialogOpen(false);
-    } catch (error) {}
+    console.log(values);
+    onCreateCard({
+      title: values.title,
+      priority: values.priority,
+      columnId: values.status.toLowerCase(),
+    });
+    setIsNewCardDialogOpen(false);
   };
 
   return (
