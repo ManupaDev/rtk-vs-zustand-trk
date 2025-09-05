@@ -12,7 +12,7 @@ export const CardItem = ({ item }: { item: TCardItem }) => {
     >
       <div className="text-sm font-medium">{item.title}</div>
       {item.priority && (
-        <Badge className="text-xs text-muted-foreground font-bold block">{item.priority}</Badge>
+        <Badge className="text-xs text-destructive bg-background font-bold block">{item.priority}</Badge>
       )}
     </button>
   );
