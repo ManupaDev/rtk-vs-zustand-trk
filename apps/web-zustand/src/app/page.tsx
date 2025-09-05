@@ -1,6 +1,6 @@
 "use client";
 
-import useStore from "@/zustand/store";
+import { useBoardStore } from "@/lib/zustand/StoreProvider";
 import { TColumn } from "@workspace/types";
 import Board from "@workspace/ui/components/shared/Board/Board";
 
@@ -35,7 +35,7 @@ const columns: TColumn[] = [
 
 export default function Page() {
   const { filters, priorities, setSearch, setPriority, clearFilters } =
-    useStore((state) => state);
+    useBoardStore((state) => state);
 
   return (
     <div className="min-h-svh">
