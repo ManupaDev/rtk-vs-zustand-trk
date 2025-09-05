@@ -1,8 +1,8 @@
 "use client";
 
-import { type ReactNode, createContext, useRef, useContext } from "react";
+import { type ReactNode, createContext, useContext, useRef } from "react";
 import { useStore } from "zustand";
-import { BoardSlice } from "./features/boardSlice";
+import { BoardSlice, initBoardSlice } from "./features/boardSlice";
 import { createAppStore } from "./store";
 export type AppStoreApi = ReturnType<typeof createAppStore>;
 
@@ -10,14 +10,14 @@ export const AppStoreContext = createContext<AppStoreApi | undefined>(
   undefined
 );
 
-export interface BoardStoreProviderProps {
+export interface AppStoreProviderProps {
   children: ReactNode;
 }
 
-export const BoardStoreProvider = ({ children }: BoardStoreProviderProps) => {
+export const AppStoreProvider = ({ children }: AppStoreProviderProps) => {
   const storeRef = useRef<AppStoreApi | null>(null);
   if (storeRef.current === null) {
-    storeRef.current = createAppStore();
+    storeRef.current = createAppStore(initBoardSlice());
   }
 
   return (

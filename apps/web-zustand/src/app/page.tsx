@@ -34,16 +34,18 @@ const columns: TColumn[] = [
 ];
 
 export default function Page() {
-  const { filters, setSearch, setPriority, clearFilters } = useAppStore(
+  const { board, setSearch, setPriority, clearFilters } = useAppStore(
     (state) => state
   );
+
+  console.log(board);
 
   return (
     <div className="min-h-svh">
       <Board
         columns={columns}
         title="Taxxa AI"
-        filters={filters}
+        filters={board.filters}
         priorities={["LOW", "MEDIUM", "HIGH", "HIGHEST"]}
         setSearch={(q) => setSearch(q)}
         setPriority={(p) => setPriority(p)}
