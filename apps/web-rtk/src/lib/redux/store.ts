@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import boardReducer from "./features/boardSlice";
 import { Api } from "./api";
+import { rtkQueryErrorLogger } from "./rtk-query-error-logger";
 
 export const makeStore = () => {
   const store = configureStore({
@@ -10,7 +11,7 @@ export const makeStore = () => {
       [Api.reducerPath]: Api.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(Api.middleware),
+      getDefaultMiddleware().concat(Api.middleware, rtkQueryErrorLogger),
   });
   setupListeners(store.dispatch);
   return store;

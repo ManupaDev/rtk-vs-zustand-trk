@@ -25,7 +25,7 @@ function makeQueryClient() {
     },
     mutationCache: new MutationCache({
       onError: (error) => {
-        toast.error(`Something went wrong: ${error.message}`);
+        toast.error(`${error.message}`);
       },
     }),
   });

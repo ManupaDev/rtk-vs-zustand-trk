@@ -29,6 +29,9 @@ export const Api = createApi({
         method: "POST",
         body: data,
       }),
+      transformErrorResponse: (response) => {
+        return "Error creating card...";
+      },
       invalidatesTags: (result, error, { boardId }) => [
         { type: "Board", id: boardId },
       ],
@@ -38,4 +41,8 @@ export const Api = createApi({
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { useGetBoardsQuery, useGetBoardByIdQuery, useCreateCardMutation } = Api;
+export const {
+  useGetBoardsQuery,
+  useGetBoardByIdQuery,
+  useCreateCardMutation,
+} = Api;
