@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 
 type BoardFilters = {
@@ -10,10 +8,11 @@ type BoardFilters = {
 type BoardContextValue = {
   filters: BoardFilters;
   priorities: string[];
+  isNewCardDialogOpen: boolean;
+  setIsNewCardDialogOpen: (open: boolean) => void;
   setSearch: (query: string) => void;
   setPriority: (priority: string | null) => void;
   clearFilters: () => void;
-  newCard: () => void;
   onCardClick?: (cardId: string) => void;
 };
 
@@ -21,11 +20,12 @@ const noop = () => {};
 
 const defaultValue: BoardContextValue = {
   filters: { search: null, priority: null },
+  isNewCardDialogOpen: false,
   priorities: [],
+  setIsNewCardDialogOpen: noop,
   setSearch: noop,
   setPriority: noop,
   clearFilters: noop,
-  newCard: noop,
   onCardClick: undefined,
 };
 
@@ -46,10 +46,13 @@ function BoardProvider({
     return {
       filters: value.filters ?? defaultValue.filters,
       priorities: value.priorities ?? defaultValue.priorities,
+      isNewCardDialogOpen:
+        value.isNewCardDialogOpen ?? defaultValue.isNewCardDialogOpen,
       setSearch: value.setSearch ?? defaultValue.setSearch,
       setPriority: value.setPriority ?? defaultValue.setPriority,
       clearFilters: value.clearFilters ?? defaultValue.clearFilters,
-      newCard: value.newCard ?? defaultValue.newCard,
+      setIsNewCardDialogOpen:
+        value.setIsNewCardDialogOpen ?? defaultValue.setIsNewCardDialogOpen,
       onCardClick: value.onCardClick ?? defaultValue.onCardClick,
     };
   }, [value]);

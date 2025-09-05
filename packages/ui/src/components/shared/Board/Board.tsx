@@ -1,4 +1,6 @@
-import { FiltersToolbar } from "@workspace/ui/components/shared/Board/BoardFiltersToolbar";
+"use client";
+
+import { BoardToolbar } from "@workspace/ui/components/shared/Board/BoardToolbar";
 import { TColumn } from "@workspace/types";
 import { Separator } from "@workspace/ui/components/separator";
 import { Column } from "@workspace/ui/components/shared/Board/BoardColumn";
@@ -12,10 +14,11 @@ type BoardProps = {
   columns: TColumn[];
   filters: BoardFilters;
   priorities: string[];
+  isNewCardDialogOpen: boolean;
+  setIsNewCardDialogOpen: (open: boolean) => void;
   setSearch: (q: string) => void;
   setPriority: (p: string | null) => void;
   clearFilters: () => void;
-  newCard: () => void;
   onCardClick?: (cardId: string) => void;
 };
 
@@ -24,10 +27,11 @@ const Board = ({
   title,
   filters,
   priorities,
+  isNewCardDialogOpen,
+  setIsNewCardDialogOpen,
   setSearch,
   setPriority,
   clearFilters,
-  newCard,
   onCardClick,
 }: BoardProps) => {
   return (
@@ -35,10 +39,11 @@ const Board = ({
       value={{
         filters,
         priorities,
+        isNewCardDialogOpen,
+        setIsNewCardDialogOpen,
         setSearch,
         setPriority,
         clearFilters,
-        newCard,
         onCardClick,
       }}
     >
@@ -48,7 +53,7 @@ const Board = ({
         </div>
         <Separator className="my-4" />
 
-        <FiltersToolbar />
+        <BoardToolbar />
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           {columns.map((column) => (

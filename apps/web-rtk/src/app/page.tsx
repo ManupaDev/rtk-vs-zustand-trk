@@ -5,13 +5,16 @@ import {
   clearFilters,
   setPriority,
   setSearch,
+  setIsNewCardDialogOpen,
 } from "@/lib/redux/features/boardSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import Board from "@workspace/ui/components/shared/Board/Board";
 import { Loader2 } from "lucide-react";
 
 export default function Page() {
-  const { filters } = useAppSelector((state) => state.board);
+  const { filters, isNewCardDialogOpen } = useAppSelector(
+    (state) => state.board
+  );
   const dispatch = useAppDispatch();
   const { data: board, isLoading, isError } = useGetBoardByIdQuery("1");
 
@@ -41,7 +44,10 @@ export default function Page() {
         setSearch={(q) => dispatch(setSearch(q))}
         setPriority={(p) => dispatch(setPriority(p))}
         clearFilters={() => dispatch(clearFilters())}
-        newCard={() => {}}
+        isNewCardDialogOpen={isNewCardDialogOpen}
+        setIsNewCardDialogOpen={(open) =>
+          dispatch(setIsNewCardDialogOpen(open))
+        }
         onCardClick={() => {}}
       />
     </div>

@@ -45,7 +45,8 @@ export default function Workspace({ boardId }: { boardId: string }) {
         setSearch={(q) => setSearch(q)}
         setPriority={(p) => setPriority(p)}
         clearFilters={() => clearFilters()}
-        newCard={() => {}}
+        isNewCardDialogOpen={false}
+        setIsNewCardDialogOpen={(open) => {}}
         onCardClick={() => {}}
       />
     </div>
