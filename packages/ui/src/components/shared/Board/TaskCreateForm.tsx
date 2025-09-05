@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@workspace/ui/components/select";
 import { Button } from "@workspace/ui/components/button";
+import { useBoard } from "@workspace/ui/components/shared/Board/BoardContext";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -36,6 +37,8 @@ const TaskCreateForm = ({
   statuses: string[];
   priorities: string[];
 }) => {
+  const { setIsNewCardDialogOpen } = useBoard();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,6 +51,7 @@ const TaskCreateForm = ({
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     try {
       console.log(values);
+      setIsNewCardDialogOpen(false);
     } catch (error) {}
   };
 
