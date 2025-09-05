@@ -37,7 +37,7 @@ const TaskCreateForm = ({
   statuses: string[];
   priorities: string[];
 }) => {
-  const { setIsNewCardDialogOpen } = useBoard();
+  const { setIsNewCardDialogOpen, onCreateCard } = useBoard();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,6 +51,11 @@ const TaskCreateForm = ({
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     try {
       console.log(values);
+      onCreateCard({
+        title: values.title,
+        priority: values.priority,
+        columnId: values.status.toLowerCase(),
+      });
       setIsNewCardDialogOpen(false);
     } catch (error) {}
   };

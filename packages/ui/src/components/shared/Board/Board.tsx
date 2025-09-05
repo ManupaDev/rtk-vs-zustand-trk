@@ -16,6 +16,11 @@ type BoardProps = {
   priorities: string[];
   isNewCardDialogOpen: boolean;
   setIsNewCardDialogOpen: (open: boolean) => void;
+  onCreateCard: (data: {
+    title: string;
+    priority?: string | null;
+    columnId: string;
+  }) => void;
   setSearch: (q: string) => void;
   setPriority: (p: string | null) => void;
   clearFilters: () => void;
@@ -29,6 +34,7 @@ const Board = ({
   priorities,
   isNewCardDialogOpen,
   setIsNewCardDialogOpen,
+  onCreateCard,
   setSearch,
   setPriority,
   clearFilters,
@@ -42,6 +48,7 @@ const Board = ({
         isNewCardDialogOpen,
         setIsNewCardDialogOpen,
         setSearch,
+        onCreateCard,
         setPriority,
         clearFilters,
         onCardClick,

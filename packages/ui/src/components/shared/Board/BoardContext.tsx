@@ -9,6 +9,11 @@ type BoardContextValue = {
   filters: BoardFilters;
   priorities: string[];
   isNewCardDialogOpen: boolean;
+  onCreateCard: (data: {
+    title: string;
+    priority?: string | null;
+    columnId: string;
+  }) => void;
   setIsNewCardDialogOpen: (open: boolean) => void;
   setSearch: (query: string) => void;
   setPriority: (priority: string | null) => void;
@@ -22,6 +27,7 @@ const defaultValue: BoardContextValue = {
   filters: { search: null, priority: null },
   isNewCardDialogOpen: false,
   priorities: [],
+  onCreateCard: noop,
   setIsNewCardDialogOpen: noop,
   setSearch: noop,
   setPriority: noop,
@@ -48,6 +54,7 @@ function BoardProvider({
       priorities: value.priorities ?? defaultValue.priorities,
       isNewCardDialogOpen:
         value.isNewCardDialogOpen ?? defaultValue.isNewCardDialogOpen,
+      onCreateCard: value.onCreateCard ?? defaultValue.onCreateCard,
       setSearch: value.setSearch ?? defaultValue.setSearch,
       setPriority: value.setPriority ?? defaultValue.setPriority,
       clearFilters: value.clearFilters ?? defaultValue.clearFilters,

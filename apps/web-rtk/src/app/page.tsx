@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetBoardByIdQuery } from "@/lib/redux/api";
+import { useCreateCardMutation, useGetBoardByIdQuery } from "@/lib/redux/api";
 import {
   clearFilters,
   setPriority,
@@ -17,6 +17,7 @@ export default function Page() {
   );
   const dispatch = useAppDispatch();
   const { data: board, isLoading, isError } = useGetBoardByIdQuery("1");
+  const [createCard, { isLoading: isCreating }] = useCreateCardMutation();
 
   if (isError) {
     return (
@@ -47,6 +48,13 @@ export default function Page() {
         isNewCardDialogOpen={isNewCardDialogOpen}
         setIsNewCardDialogOpen={(open) =>
           dispatch(setIsNewCardDialogOpen(open))
+        }
+        onCreateCard={(data) =>
+          createCard({
+            boardId: board.id,
+            columnId: data.columnId,
+            data: { title: data.title, priority: data.priority },
+          })
         }
         onCardClick={() => {}}
       />
