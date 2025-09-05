@@ -13,10 +13,10 @@ export async function POST(
     const body = await req.json().catch(() => ({}));
     const title = String(body?.title ?? "").trim();
     const priority = body?.priority ? String(body.priority) : undefined;
-    throw new Error("test");
     if (!title) {
       return NextResponse.json({ error: "title required" }, { status: 400 });
     }
+    console.log(title, priority);
     const created = await db.boards.addCard(id, columnId, { title, priority });
     if (!created) {
       return NextResponse.json({ error: "Board/column not found" }, { status: 404 });

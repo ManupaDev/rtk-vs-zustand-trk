@@ -54,7 +54,7 @@ export default function Page() {
             boardId: board.id,
             columnId: data.columnId,
             data: { title: data.title, priority: data.priority },
-          }).unwrap();
+          });
         }}
         onCardClick={() => {}}
       />

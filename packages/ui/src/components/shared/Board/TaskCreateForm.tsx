@@ -34,7 +34,7 @@ const TaskCreateForm = ({
   statuses,
   priorities,
 }: {
-  statuses: string[];
+  statuses: { label: string; value: string }[];
   priorities: string[];
 }) => {
   const { setIsNewCardDialogOpen, onCreateCard } = useBoard();
@@ -43,7 +43,7 @@ const TaskCreateForm = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      status: statuses[0] ?? "",
+      status: statuses[0]?.value ?? "",
       priority: priorities[0] ?? "",
     },
   });
@@ -91,8 +91,8 @@ const TaskCreateForm = ({
                   <SelectGroup>
                     <SelectLabel>Statuses</SelectLabel>
                     {statuses.map((s) => (
-                      <SelectItem key={s} value={s}>
-                        {s}
+                      <SelectItem key={s.value} value={s.value}>
+                        {s.label}
                       </SelectItem>
                     ))}
                   </SelectGroup>

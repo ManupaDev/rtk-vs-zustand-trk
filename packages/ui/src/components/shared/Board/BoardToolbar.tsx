@@ -83,7 +83,19 @@ export function BoardToolbar() {
             </DialogDescription>
           </DialogHeader>
           <TaskCreateForm
-            statuses={["TODO", "IN PROGRESS", "IN REVIEW", "COMPLETED"]}
+            statuses={[{
+              label: "TODO",
+              value: "todo",
+            }, {
+              label: "IN PROGRESS",
+              value: "in-progress",
+            }, {
+              label: "IN REVIEW",
+              value: "in-review",
+            }, {
+              label: "COMPLETED",
+              value: "completed",
+            }]}
             priorities={priorities}
           />
         </DialogContent>
