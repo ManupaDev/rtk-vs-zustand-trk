@@ -6,7 +6,7 @@ import { useStore } from "zustand";
 
 import {
   type BoardStore,
-  createBoardStore
+  createBoardStore,
 } from "@/lib/zustand/features/boardStore";
 
 export type BoardStoreApi = ReturnType<typeof createBoardStore>;
@@ -36,12 +36,12 @@ const useBoardStore = <T,>(selector: (store: BoardStore) => T): T => {
   const boardStoreContext = useContext(BoardStoreContext);
 
   if (!boardStoreContext) {
-    throw new Error(`useCounterStore must be used within CounterStoreProvider`);
+    throw new Error(`useBoardStore must be used within BoardStoreProvider`);
   }
 
   return useStore(boardStoreContext, selector);
 };
 
-export const useFilters = () => useBoardStore((state) => state.filters)
-export const useUi = () => useBoardStore((state) => state.ui)
-export const useActions = () => useBoardStore((state) => state.actions)
+export const useFilters = () => useBoardStore((state) => state.filters);
+export const useUi = () => useBoardStore((state) => state.ui);
+export const useActions = () => useBoardStore((state) => state.actions);
