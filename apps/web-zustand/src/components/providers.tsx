@@ -14,6 +14,12 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 
+declare global {
+  interface Window {
+    __TANSTACK_QUERY_CLIENT__: import("@tanstack/query-core").QueryClient;
+  }
+}
+
 function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
@@ -42,7 +48,13 @@ export function getQueryClient() {
     // This is very important, so we don't re-make a new client if React
     // suspends during the initial render. This may not be needed if we
     // have a suspense boundary BELOW the creation of the query client
-    if (!browserQueryClient) browserQueryClient = makeQueryClient();
+    if (!browserQueryClient) {
+      browserQueryClient = makeQueryClient();
+      // This code is only for TypeScript
+
+      // This code is for all users
+      window.__TANSTACK_QUERY_CLIENT__ = browserQueryClient;
+    }
     return browserQueryClient;
   }
 }

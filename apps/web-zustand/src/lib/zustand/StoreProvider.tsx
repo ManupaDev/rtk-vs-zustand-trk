@@ -1,13 +1,12 @@
 // src/providers/counter-store-provider.tsx
 "use client";
 
-import { type ReactNode, createContext, useRef, useContext } from "react";
+import { type ReactNode, createContext, useContext, useRef } from "react";
 import { useStore } from "zustand";
 
 import {
   type BoardStore,
-  createBoardStore,
-  initBoardStore,
+  createBoardStore
 } from "@/lib/zustand/features/boardStore";
 
 export type BoardStoreApi = ReturnType<typeof createBoardStore>;

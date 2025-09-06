@@ -1,4 +1,5 @@
 import { createStore } from "zustand/vanilla";
+import { devtools } from "zustand/middleware";
 
 export type BoardState = {
   filters: {
@@ -36,17 +37,38 @@ export const initBoardStore = (state: BoardState): BoardState => {
 };
 
 export const createBoardStore = (initState: BoardState = defaultInitState) => {
-  return createStore<BoardStore>()((set) => ({
-    ...initState,
-    actions: {
-      setSearch: (search: string) =>
-        set((state) => ({ filters: { ...state.filters, search } })),
-      setPriority: (priority: string | null) =>
-        set((state) => ({ filters: { ...state.filters, priority } })),
-      clearFilters: () =>
-        set((state) => ({ filters: { search: "", priority: null } })),
-      setIsNewCardDialogOpen: (open: boolean) =>
-        set((state) => ({ ui: { ...state.ui, isNewCardDialogOpen: open } })),
-    },
-  }));
+  return createStore<BoardStore>()(
+    devtools(
+      (set, get) => ({
+        ...initState,
+        actions: {
+          setSearch: (search: string) =>
+            set(
+              (state) => ({ filters: { ...state.filters, search } }),
+              false,
+              "board/setSearch"
+            ),
+          setPriority: (priority: string | null) =>
+            set(
+              (state) => ({ filters: { ...state.filters, priority } }),
+              false,
+              "board/setPriority"
+            ),
+          clearFilters: () =>
+            set(
+              () => ({ filters: { search: "", priority: null } }),
+              false,
+              "board/clearFilters"
+            ),
+          setIsNewCardDialogOpen: (open: boolean) =>
+            set(
+              (state) => ({ ui: { ...state.ui, isNewCardDialogOpen: open } }),
+              false,
+              open ? "board/openNewCardDialog" : "board/closeNewCardDialog"
+            ),
+        },
+      }),
+      { name: "boardStore" }
+    )
+  );
 };
