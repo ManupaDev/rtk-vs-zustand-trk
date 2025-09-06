@@ -5,6 +5,8 @@
 
 A minimal Turbo/Next.js monorepo showcasing a shared UI package and two frontend implementations of a Kanban board (Redux Toolkit and Zustand), backed by a simple API with in-memory data.
 
+---
+
 ## Contents
 
 ```
