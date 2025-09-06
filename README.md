@@ -1,4 +1,7 @@
-# Technical Exercise Monorepo
+# TaxxaAI Technical Exercise Monorepo
+
+## Presentation
+[Redux vs Zustand: The Verdict](https://www.canva.com/design/DAGyLpGBWU0/wzWVnq7jsnQAMbj_nSq_wg/view?utm_content=DAGyLpGBWU0&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h1ca723819b)
 
 A minimal Turbo/Next.js monorepo showcasing a shared UI package and two frontend implementations of a Kanban board (Redux Toolkit and Zustand), backed by a simple API with in-memory data.
 
