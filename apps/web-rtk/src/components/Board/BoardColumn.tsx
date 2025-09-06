@@ -8,7 +8,6 @@ import {
 import { ScrollArea } from "@workspace/ui/components/scroll-area";
 import type { TColumn } from "@workspace/types";
 import { CardItem } from "@workspace/ui/components/shared/Board/BoardCardItem";
-import { useBoard } from "@workspace/ui/components/shared/Board/BoardContext";
 import { useAppSelector } from "@/lib/redux/hooks";
 import { selectBoard } from "@/lib/redux/features/boardSlice";
 
